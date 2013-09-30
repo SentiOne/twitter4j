@@ -49,9 +49,9 @@
     </mailingLists>
     <distributionManagement>
         <repository>
-            <id>example_dep</id>
-            <url>http://example.com/maven2</url>
-            <name>Maven Repo</name>
+            <id>chimeo_dep</id>
+            <url>http://remote.senti1.com:8086/nexus/content/repositories/chimeo_dep</url>
+            <name>Chimeo Dependencies</name>
         </repository>
     </distributionManagement>
     <profiles>
