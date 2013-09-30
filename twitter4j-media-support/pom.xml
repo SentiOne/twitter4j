@@ -1,9 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <artifactId>twitter4j</artifactId>
+        <groupId>org.twitter4j</groupId>
+        <version>3.0.4-ZOLW-CUSTOM</version>
+    </parent>
     <groupId>org.twitter4j</groupId>
     <artifactId>twitter4j-media-support</artifactId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.4-ZOLW-CUSTOM</version>
     <packaging>jar</packaging>
     <name>twitter4j-media-support</name>
     <description>Twitter4J optional component adds multimedia support
@@ -40,21 +44,6 @@
         <system>Jira</system>
         <url>http://twitter4j.org/jira/browse/TFJ</url>
     </issueManagement>
-    <distributionManagement>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <uniqueVersion>false</uniqueVersion>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/
-            </url>
-        </repository>
-        <snapshotRepository>
-            <id>org.twitter4j</id>
-            <name>twitter4j.org Repository</name>
-            <uniqueVersion>false</uniqueVersion>
-            <url>file:${user.home}/maven2/</url>
-        </snapshotRepository>
-    </distributionManagement>
     <profiles>
         <profile>
             <id>release-sign-artifacts</id>
@@ -97,7 +86,7 @@
         <dependency>
             <groupId>org.twitter4j</groupId>
             <artifactId>twitter4j-core</artifactId>
-            <version>3.0.4-SNAPSHOT</version>
+            <version>3.0.4-ZOLW-CUSTOM</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.twitter4j</groupId>
     <artifactId>twitter4j</artifactId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.4-ZOLW-CUSTOM</version>
     <packaging>pom</packaging>
     <name>twitter4j</name>
     <description>A Java library for the Twitter API</description>
@@ -49,18 +49,10 @@
     </mailingLists>
     <distributionManagement>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <uniqueVersion>false</uniqueVersion>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/
-            </url>
+            <id>chimeo_dep</id>
+            <url>http://remote.senti1.com:8086/nexus/content/repositories/chimeo_dep</url>
+            <name>Chimeo Dependencies</name>
         </repository>
-        <snapshotRepository>
-            <id>org.twitter4j</id>
-            <name>twitter4j.org Repository</name>
-            <uniqueVersion>false</uniqueVersion>
-            <url>file:${user.home}/maven2/</url>
-        </snapshotRepository>
     </distributionManagement>
     <profiles>
         <profile>

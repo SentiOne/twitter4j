@@ -64,6 +64,7 @@ import static twitter4j.internal.json.z_T4JInternalParseUtil.*;
     private MediaEntity[] mediaEntities;
     private SymbolEntity[] symbolEntities;
     private long currentUserRetweetId = -1L;
+	private String lang;
 
     /*package*/StatusJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
         super(res);
@@ -105,6 +106,9 @@ import static twitter4j.internal.json.z_T4JInternalParseUtil.*;
         inReplyToScreenName = getUnescapedString("in_reply_to_screen_name", json);
         retweetCount = getLong("retweet_count", json);
         favoriteCount = getLong("favorite_count", json);
+		if (!json.isNull("lang")){
+			lang = getUnescapedString("lang",json);
+		}
         isPossiblySensitive = getBoolean("possibly_sensitive", json);
         try {
             if (!json.isNull("user")) {
@@ -426,7 +430,12 @@ import static twitter4j.internal.json.z_T4JInternalParseUtil.*;
         return isoLanguageCode;
     }
 
-    /*package*/
+	@Override
+	public String getLang() {
+		return lang;
+	}
+
+	/*package*/
     static ResponseList<Status> createStatusList(HttpResponse res, Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
