@@ -39,6 +39,8 @@ public final class StatusUpdate implements java.io.Serializable {
     private transient InputStream mediaBody;
     private File mediaFile;
     private long[] mediaIds;
+    private Boolean autoPopulateReplyMetadata;
+    private long[] excludeReplyUserIds;
 
     public StatusUpdate(String status) {
         this.status = status;
@@ -177,6 +179,28 @@ public final class StatusUpdate implements java.io.Serializable {
         return possiblySensitive;
     }
 
+    /**
+     * @since Twitter4J 4.0.6-SENTIONE
+     */
+    public Boolean getAutoPopulateReplyMetadata() {
+        return autoPopulateReplyMetadata;
+    }
+
+    public void setAutoPopulateReplyMetadata(Boolean autoPopulateReplyMetadata) {
+        this.autoPopulateReplyMetadata = autoPopulateReplyMetadata;
+    }
+
+    /**
+     * @since Twitter4J 4.0.6-SENTIONE
+     */
+    public long[] getExcludeReplyUserIds() {
+        return excludeReplyUserIds;
+    }
+
+    public void setExcludeReplyUserIds(long[] excludeReplyUserIds) {
+        this.excludeReplyUserIds = excludeReplyUserIds;
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         ArrayList<HttpParameter> params = new ArrayList<HttpParameter>();
         appendParameter("status", status, params);
@@ -186,7 +210,6 @@ public final class StatusUpdate implements java.io.Serializable {
         if (location != null) {
             appendParameter("lat", location.getLatitude(), params);
             appendParameter("long", location.getLongitude(), params);
-
         }
         appendParameter("place_id", placeId, params);
         if (!displayCoordinates) {
@@ -201,8 +224,30 @@ public final class StatusUpdate implements java.io.Serializable {
         } else if (mediaIds != null && mediaIds.length >= 1) {
             params.add(new HttpParameter("media_ids", StringUtil.join(mediaIds)));
         }
+        if (autoPopulateReplyMetadata != null) {
+            params.add(new HttpParameter("auto_populate_reply_metadata", autoPopulateReplyMetadata));
+        }
+        if (excludeReplyUserIds != null) {
+            params.add(new HttpParameter("exclude_reply_user_ids", getCsv(excludeReplyUserIds)));
+        }
+
         HttpParameter[] paramArray = new HttpParameter[params.size()];
         return params.toArray(paramArray);
+    }
+
+    private String getCsv(long[] values) {
+        StringBuffer sb = new StringBuffer();
+
+        for (long value : values) {
+            sb.append(value);
+            sb.append(",");
+        }
+
+        if (sb.length() > 0) {
+            return sb.deleteCharAt(sb.length() - 1).toString();
+        } else {
+            return "";
+        }
     }
 
     private void appendParameter(String name, String value, List<HttpParameter> params) {
