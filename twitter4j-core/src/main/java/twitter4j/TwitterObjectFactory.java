@@ -226,6 +226,14 @@ public final class TwitterObjectFactory {
         }
     }
 
+    public static DirectMessageEvent createDirectMessageEvent(String rawJSON) throws TwitterException {
+        try {
+            return new DirectMessageEventJSONImpl(new JSONObject(rawJSON));
+        } catch (JSONException e) {
+            throw new TwitterException(e);
+        }
+    }
+
     /**
      * Constructs a Location object from rawJSON string.
      *
